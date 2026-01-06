@@ -12,6 +12,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # 【新增】強制設定 Java 17，解決環境衝突
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -27,7 +34,7 @@ jobs:
         run: pip install flet
 
       - name: Build APK
-        # 修改重點：前面加了 echo "y" | 讓它自動說 Yes
+        # 保持 echo "y"，讓它自動確認
         run: echo "y" | flet build apk --org com.mywaterapp --product "WaterApp" --verbose
 
       - name: Upload APK
