@@ -26,8 +26,9 @@ jobs:
       - name: Install Flet
         run: pip install flet
 
+      # 修改點：拿掉了 --project 參數，讓它直接在當前目錄打包
       - name: Build APK
-        run: flet build apk --project water_app --org com.mywaterapp --product "WaterApp" --verbose
+        run: flet build apk --org com.mywaterapp --product "WaterApp" --verbose
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
